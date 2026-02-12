@@ -30,13 +30,14 @@ This project is a web adaptation of a Java-based Tic Tac Toe engine, including a
 ---
 
 ## 📂 Project Structure
-
 Tic-Tac-Toe/
 │
-├── index.html # Game structure
-├── style.css # UI styling
-├── script.js # Game logic + AI
-└── README.md # Project documentation
+├── index.html        # Main HTML structure
+├── style.css         # UI styling
+├── script.js         # Game logic + AI (Minimax)
+└── README.md         # Project documentation
+
+
 
 
 ---
