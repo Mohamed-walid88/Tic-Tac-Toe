@@ -30,16 +30,14 @@ This project is a web adaptation of a Java-based Tic Tac Toe engine, including a
 ---
 
 ## 📂 Project Structure
+```text
 Tic-Tac-Toe/
 │
 ├── index.html        # Main HTML structure
 ├── style.css         # UI styling
 ├── script.js         # Game logic + AI (Minimax)
 └── README.md         # Project documentation
-
-
-
-
+```
 ---
 
 ## 🧠 How the AI Works
@@ -83,7 +81,7 @@ No installation or dependencies required.
 
 Developed by **Mohammed Walid**
 
-Converted from a Java-based engine into a fully functional web application.
+Converted from a Java-based engine [original engine](https://github.com/Mohamed-walid88/Tic-Tac-Toe-Engine) into a fully functional web application.
 
 ---
 
