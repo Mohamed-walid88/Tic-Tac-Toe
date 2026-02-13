@@ -70,7 +70,7 @@ No installation or dependencies required.
 - Score tracking system
 - Sound effects
 - Animations
-- Player vs Player mode
+- <del>Player vs Player mode</del>
 - Mobile optimization
 - Alpha-Beta pruning optimization
 - Online multiplayer mode
