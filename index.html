@@ -11,12 +11,15 @@
     <h1>Tic Tac Toe</h1>
 
     <div class="controls">
+        <button onclick="restartGame()">Restart</button>
+        <button onclick="changePlayer()">Change Player</button>
+        <button onclick="twoPlayerMode()">Two Player Mode</button>
+        <br>
         <select id="difficulty" onchange="restartGame()">
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard" selected>Hard</option>
         </select>
-        <button onclick="restartGame()">Restart</button>
     </div>
 
     <div class="board" id="board"></div>

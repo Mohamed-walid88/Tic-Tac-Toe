@@ -2,9 +2,11 @@ const boardElement = document.getElementById("board");
 const statusText = document.getElementById("status");
 const difficultySelect = document.getElementById("difficulty");
 
+let twoPlayer = false; // Flag for two-player mode
+let change = false; // false = human starts, true = AI starts
 let board = Array(9).fill("");
-let human = "X";
-let ai = "O";
+let Player1 = "X";
+let Player2 = "O";
 let gameOver = false;
 
 // Initialize board UI
@@ -21,12 +23,21 @@ function createBoard() {
 function makeMove(index) {
     if (board[index] !== "" || gameOver) return;
 
-    board[index] = human;
+    board[index] = Player1;
     updateUI();
 
     if (checkGameState()) return;
 
-    setTimeout(aiMove, 300);
+
+    if (twoPlayer) {
+        [Player1, Player2] = [Player2, Player1]; // Swap players
+        statusText.textContent = `${Player1}'s Turn`;
+        makeMove(index); // Allow next player to move
+    }
+    else {
+        setTimeout(aiMove, 300);
+    }
+    
 }
 
 function aiMove() {
@@ -41,7 +52,7 @@ function aiMove() {
         move = bestMove();
     }
 
-    board[move] = ai;
+    board[move] = Player2;
     updateUI();
     checkGameState();
 }
@@ -60,7 +71,7 @@ function bestMove() {
 
     for (let i = 0; i < 9; i++) {
         if (board[i] === "") {
-            board[i] = ai;
+            board[i] = Player2;
             let score = minimax(board, 0, false);
             board[i] = "";
             if (score > bestScore) {
@@ -80,7 +91,7 @@ function minimax(newBoard, depth, isMaximizing) {
         let best = -Infinity;
         for (let i = 0; i < 9; i++) {
             if (newBoard[i] === "") {
-                newBoard[i] = ai;
+                newBoard[i] = Player2;
                 best = Math.max(best, minimax(newBoard, depth + 1, false));
                 newBoard[i] = "";
             }
@@ -90,7 +101,7 @@ function minimax(newBoard, depth, isMaximizing) {
         let best = Infinity;
         for (let i = 0; i < 9; i++) {
             if (newBoard[i] === "") {
-                newBoard[i] = human;
+                newBoard[i] = Player1;
                 best = Math.min(best, minimax(newBoard, depth + 1, true));
                 newBoard[i] = "";
             }
@@ -109,7 +120,7 @@ function evaluate(b) {
     for (let pattern of winPatterns) {
         let [a,b1,c] = pattern;
         if (b[a] && b[a] === b[b1] && b[a] === b[c]) {
-            return b[a] === ai ? 1 : -1;
+            return b[a] === Player2 ? 1 : -1;
         }
     }
 
@@ -121,11 +132,21 @@ function checkGameState() {
     let result = evaluate(board);
 
     if (result === 1) {
-        statusText.textContent = "AI Wins 🤖";
+        if (twoPlayer) {
+            statusText.textContent = "Player 2 Wins 🎉";
+        }
+        else {
+            statusText.textContent = "AI Wins 🤖";
+        }
         gameOver = true;
         return true;
     } else if (result === -1) {
-        statusText.textContent = "You Win 🎉";
+        if (twoPlayer) {
+            statusText.textContent = "Player 1 Wins 🎉";
+        }
+        else {
+            statusText.textContent = "You Win 🎉";
+        }
         gameOver = true;
         return true;
     } else if (result === 0) {
@@ -151,6 +172,30 @@ function restartGame() {
     gameOver = false;
     statusText.textContent = "";
     createBoard();
+
+    if (change) {
+        setTimeout(aiMove, 300); // AI starts
+    }
+}
+
+function changePlayer() {
+    Player1 = Player1 === "X" ? "O" : "X";
+    Player2 = Player2 === "X" ? "O" : "X";
+
+    if (!twoPlayer) {
+        change = !change;
+    }
+    restartGame();
+}
+
+function twoPlayerMode() {
+    Player1 = "X";
+    Player2 = "O";
+    twoPlayer = true;
+    restartGame();
 }
 
 createBoard();
+if (change){
+    setTimeout(aiMove, 300); // AI starts when page loads
+}
