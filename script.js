@@ -133,7 +133,7 @@ function checkGameState() {
 
     if (result === 1) {
         if (twoPlayer) {
-            statusText.textContent = "Player 2 Wins 🎉";
+            statusText.textContent = `${Player2} Wins 🎉`;
         }
         else {
             statusText.textContent = "AI Wins 🤖";
@@ -142,7 +142,7 @@ function checkGameState() {
         return true;
     } else if (result === -1) {
         if (twoPlayer) {
-            statusText.textContent = "Player 1 Wins 🎉";
+            statusText.textContent = `${Player1} Wins 🎉`;
         }
         else {
             statusText.textContent = "You Win 🎉";
@@ -194,7 +194,7 @@ function twoPlayerMode() {
         Player2 = "O";
         twoPlayer = true;
         difficultySelect.disabled = true; // Disable difficulty selection in two-player mode
-        changeGameMode.textContent = "Single Player Mode";
+        changeGameMode.textContent = "Single Player Mode"; // Update button text
     }
     else {
         Player1 = "X";
