@@ -189,9 +189,20 @@ function changePlayer() {
 }
 
 function twoPlayerMode() {
-    Player1 = "X";
-    Player2 = "O";
-    twoPlayer = true;
+    if (changeGameMode.textContent === "Two Player Mode") {
+        Player1 = "X";
+        Player2 = "O";
+        twoPlayer = true;
+        difficultySelect.disabled = true; // Disable difficulty selection in two-player mode
+        changeGameMode.textContent = "Single Player Mode";
+    }
+    else {
+        Player1 = "X";
+        Player2 = "O";
+        twoPlayer = false;
+        difficultySelect.disabled = false; // Enable difficulty selection in single-player mode
+        changeGameMode.textContent = "Two Player Mode";
+    }
     restartGame();
 }
 
